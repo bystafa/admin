@@ -1,0 +1,22 @@
+.header {
+    padding: 20px 100px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #EDEEF6;
+    h3 {
+       font-weight: 1;
+       outline: none;
+       border: none;
+       cursor: pointer;
+    }
+    .right {
+        display: flex;
+        flex-direction: row;
+        h6 {
+            margin: 0 30px 0 0;
+            position: relative;
+            top: 10px
+        }
+    }
+}

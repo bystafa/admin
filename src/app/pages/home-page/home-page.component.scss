@@ -1,0 +1,34 @@
+.mainList {
+    margin: 50px 0;
+    padding: 0 300px;
+    .post {
+        background-color: #ffffff;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid #d0d0d0;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        //padding: 10px;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+        h3, p {
+            padding: 10px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin-left: 15px;
+        }
+        p {
+            margin-top: 20px;
+        }
+
+        img {
+            height: 300px;
+            width: 500px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 5px;
+            right: 15px;
+        }
+    }
+}

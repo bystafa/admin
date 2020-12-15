@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.btn {
+    outline: none;
+    padding: 5px 15px;
+    background-color: #121BD3;
+    opacity: 0.7;
+    color: #ffffff;
+    border-radius: 0;
+}
+.btn:hover {
+    color: #ffffff;
+}
+
+hr {
+    margin: 0;
+}
