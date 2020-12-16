@@ -1,1 +1,8 @@
-<p>auth-page works!</p>
+<div class="auth">
+    <p>{{error}}</p>
+    <strong><label>Логин</label></strong>
+    <input [(ngModel)]="login">
+    <strong><label>Пароль</label></strong>
+    <input [(ngModel)]="password" type="password">
+    <button class="btn" (click)="logIn()">Войти</button>
+</div>

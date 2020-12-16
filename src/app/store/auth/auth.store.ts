@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { EntityState, EntityStore, StoreConfig } from "@datorama/akita";
-import { Comment } from './comments.model'
+import { Auth } from "./auth.model";
 
-export interface CommentsState extends EntityState<Comment> {}
+export interface AuthState extends EntityState<Auth> {}
 
 @Injectable({ providedIn: 'root' })
 @StoreConfig({
     name: 'comments'
 })
-export class CommentsStore extends EntityStore<CommentsState> {
+export class AuthStore extends EntityStore<AuthState> {
     constructor() {
         super();
     }

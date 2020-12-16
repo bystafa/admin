@@ -1,5 +1,5 @@
-<!-- <div class="main">
-    <div *ngIf="post$ | async as post; else loading">
+<div class="main">
+    <div *ngFor="let post of post$ | async">
         <small>{{post.author}}, {{post.date}}</small>
         <hr>
         <div class="img">
@@ -9,36 +9,25 @@
         <hr>
         <p>{{post.text}}</p>
         <hr>
-        <div class="submit">
+        <div class="submit" *ngIf="user">
             <textarea cols="100" rows="2" placeholder="Ввведите комментарий..." [(ngModel)]="text" #textArea></textarea>
             <button class="btn" (click)="addComment(post.id)">{{sent ? 'Отправить' : 'Редактировать'}}</button>
         </div>
-        <div *ngIf="comments$ | async as comments; else loading2">
+        <div *ngIf="comments$ | async as comments">
             <h4 *ngIf="comments.length > 0">Комментарии({{comments.length}}):</h4>
-            <div *ngFor="let comment of comments; let idx = index">
+            <div *ngFor="let comment of comments">
                 <div class="info">
                     <small>{{comment.author}}</small>
-                    <small>{{comment.date}}</small>
+                    <small>{{comment.date | date}}</small>
                 </div>
                 <div class="comment">
                     <span>{{comment.text}}</span>
-                    коммент<div *ngIf="comment.author === user"> 
-                    <div *ngIf="true">
-                        <button class="btn" (click)="changeComment(comment.id, comment.text,textArea)">Редактировать</button>
+                    <div *ngIf="comment.author === user">
+                        <button class="btn" (click)="changeComment(comment.id, comment.text)">Редактировать</button>
                         <button class="btn" (click)="deleteComment(comment.id)">Удалить</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<ng-template #loading>
-    <p class="text-center">Загружаю пост...</p>
-</ng-template>
-  
-<ng-template #loading2>
-    <p class="text-center">Загружаю комментарии...</p>
-</ng-template> -->
-<div *ngFor="let comment of comments$ | async">
-    <p>{{comment.text}}</p>
 </div>

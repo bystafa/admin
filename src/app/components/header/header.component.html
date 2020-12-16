@@ -2,7 +2,7 @@
     <h3 [routerLink]="['/']">Новости</h3>
     <div class="right">
         <h6>{{(this.user) ? this.user: ''}}</h6>
-        <button *ngIf="!this.auth; else out" (click)="logIn()" class="btn">Войти</button>
+        <button *ngIf="!this.user; else out" [routerLink]="['/auth']" class="btn">Войти</button>
         <ng-template #out>
             <button class="btn" (click)="logOut()">Выйти</button>
         </ng-template>

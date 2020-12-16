@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { QueryEntity } from "@datorama/akita";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { CommentsState, CommentsStore } from "./comments.store";
+import { Comment } from './comments.model'
 
 @Injectable({providedIn: 'root'})
 export class CommentsQuery extends QueryEntity<CommentsState> {

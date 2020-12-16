@@ -7,20 +7,21 @@ import { PostsState, PostsStore } from "./posts.store";
 
 @Injectable({providedIn: 'root'})
 export class PostsQuery extends QueryEntity<PostsState> {
+    
     constructor(protected store: PostsStore) {
         super(store)
     }
 
-    // getPost(idPost: number): Observable<Post> {
-    //     return this.selectAll().pipe(
-    //         map((response: {[key: string]: any}) => {
-    //             return Object
-    //               .keys(response)
-    //               .map(key => ({
-    //                 ...response[key]
-    //               }))
-    //               .filter(p => p.id === idPost)
-    //         })
-    //     )[0]
-    // }
+    getPost(idPost: number): Observable<Post[]> {
+        return this.selectAll().pipe(
+            map((response: {[key: string]: any}) => {
+                return Object
+                  .keys(response)
+                  .map(key => ({
+                    ...response[key]
+                  }))
+                  .filter(p => p.id === idPost)
+            })
+        )
+    }
 }

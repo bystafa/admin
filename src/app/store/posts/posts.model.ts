@@ -6,7 +6,9 @@ export interface Post {
     text: string;
     author: string;
     date: Date;
-    img?: Object;
+    img?: {
+        url: string;
+    };
 }
 
 export function createPost(params: Partial<Post>) {
