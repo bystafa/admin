@@ -1,8 +1,52 @@
-<div class="auth">
+<!-- <div class="auth">
     <p>{{error}}</p>
     <strong><label>Логин</label></strong>
     <input [(ngModel)]="login">
     <strong><label>Пароль</label></strong>
     <input [(ngModel)]="password" type="password">
     <button class="btn" (click)="logIn()">Войти</button>
+</div> -->
+
+<div [formGroup]="form" class="form">
+    <h2>Аутентификация</h2>
+    <h6>{{message}}</h6>
+    <div class="formcontrol">
+        <label for="login">Логин</label>
+        <input id="login" type="text" placeholder="login" formControlName="login">
+        <div
+            *ngIf="form.get('login').touched && form.get('login').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('login').errors.required">
+                Введите поле логин
+            </small>
+            <small *ngIf="form.get('login').errors.minlength">
+                Пароль должен быть не менее
+                {{form.get('login').errors.minlength.requiredLength}}
+                символов. Сейчас он
+                {{form.get('login').errors.minlength.actualLength}}
+                символа.
+            </small>
+        </div>
+    </div>
+    <div class="formcontrol">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" placeholder="password" formControlName="password">
+        <div
+            class="validation"
+            *ngIf="form.get('password').touched && form.get('password').invalid"
+            >
+            <small *ngIf="form.get('password').errors.required">
+                Введите пароль
+            </small>
+            <small *ngIf="form.get('password').errors.minlength">
+                Пароль должен быть не менее
+                {{form.get('password').errors.minlength.requiredLength}}
+                символов. Сейчас он
+                {{form.get('password').errors.minlength.actualLength}}
+                символа.
+            </small>
+        </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid" class="btn" (click)="logIn()">Войти</button>
 </div>

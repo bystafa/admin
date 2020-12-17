@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,6 +14,7 @@ export class PostPageComponent implements OnInit, DoCheck {
 
   comments$: Observable<Comment[]>
   post$: Observable<Post[]>
+  //post: Post
   comment: Comment
   sent = true
   user = ''
@@ -37,6 +37,12 @@ export class PostPageComponent implements OnInit, DoCheck {
   }
 
   getPost(): void{
+    // this.route.params.subscribe((params: Params) => {
+    //   this.id = +params
+    // },null, ()=> {
+    //   console.log(this.id)
+    //   console.log(this.postsQuery.getPost(this.id))
+    // })
     this.post$ = this.route.params
     .pipe(switchMap((params: Params) => {
       return this.postsQuery.getPost(+params['id'])
@@ -63,17 +69,17 @@ export class PostPageComponent implements OnInit, DoCheck {
   }
 
   addComment(idPost: number): void {
-    if (this.sent) {
-      this.comment = {
-        id: +new Date(),
-        author: localStorage.getItem('user'),
-        text: this.text,
-        date: new Date,
-        post: {
-          id: idPost
-        }
-      }
-      this.CommentsService.addComment(this.comment).subscribe(null,null,
+    if (this.sent && this.text) {
+      // this.comment = {
+      //   id: +new Date(),
+      //   author: localStorage.getItem('user'),
+      //   text: this.text,
+      //   date: new Date,
+      //   post: {
+      //     id: idPost
+      //   }
+      // }
+      this.CommentsService.addComment(idPost, this.text).subscribe(null,null,
         () => {
           this.getComments()
         })

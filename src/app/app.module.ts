@@ -30,7 +30,8 @@ import { AdminLayoutPageComponent } from './pages/admin-layout-page/admin-layout
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

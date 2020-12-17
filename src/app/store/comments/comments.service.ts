@@ -15,7 +15,24 @@ export class CommentsService {
         )
     }
 
-    addComment(comment: Comment) {
+    // addComment(comment: Comment) {
+    //     this.commentStore.add(comment)
+    //     return this.http.post<Comment>('http://localhost:1337/COMMENTS', comment, {
+    //         headers: new HttpHeaders({
+    //             'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+    //         })
+    //     })
+    // }
+    addComment(idPost: number, text: string) {
+        let comment = {
+            id: +new Date(),
+            author: localStorage.getItem('user'),
+            text,
+            date: new Date,
+            post: {
+                id: idPost
+            }
+        }
         this.commentStore.add(comment)
         return this.http.post<Comment>('http://localhost:1337/COMMENTS', comment, {
             headers: new HttpHeaders({
@@ -23,6 +40,7 @@ export class CommentsService {
             })
         })
     }
+
 
     changeComment(id: number, text: string) {
         this.commentStore.update(id, {text})

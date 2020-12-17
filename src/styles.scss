@@ -3,6 +3,14 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+:root {
+    --primary-color: #dc3545;
+    --dark-color: #333333;
+    --light-color: #f4f4f4;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+  }
+
 .btn {
     outline: none;
     padding: 5px 15px;
@@ -10,6 +18,9 @@
     opacity: 0.7;
     color: #ffffff;
     border-radius: 0;
+    &:disabled {
+      cursor: not-allowed;
+    }
 }
 .btn:hover {
     color: #ffffff;
@@ -17,4 +28,32 @@
 
 hr {
     margin: 0;
+}
+.formcontrol {
+    display: block;
+    color: #888;
+    margin-bottom: .8rem;
+  
+    &.invalid {
+      color: var(--primary-color);
+      input {
+        border-color: var(--primary-color);
+      }
+    }
+  
+    .validation {
+      color: var(--primary-color);
+    }
+}
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
 }
