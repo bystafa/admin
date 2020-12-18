@@ -1,0 +1,31 @@
+.form {
+    h2 {
+        margin-bottom: 30px;
+    }
+    img {
+        width: 300px;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+    max-width: 900px;
+    margin: 50px auto 0;
+    .rowInfo {
+        display: flex;
+        flex-direction: row;
+    }
+    .inputs {
+        margin-left: 120px;
+        .btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+    .btn {
+        margin-top: 10px;
+        width: 300px;
+    }
+    .img {
+        display: flex;
+        flex-direction: column;
+    }
+}

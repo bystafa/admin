@@ -1,0 +1,15 @@
+<div class="form" *ngFor="let user of user$ |async">
+    <h1>{{user.firstName}} {{user.lastName}}</h1>
+    <div class="rowInfo">
+        <img *ngIf="user.img" src="{{'http://localhost:1337' + user.img.url}}">
+        <img *ngIf="!user.img" src="http://localhost:1337/uploads/not_available_07646d730e.jpg">
+        <div class="text">
+            <p *ngIf="user.username"><strong>Псевдоним:</strong> {{user.username}}</p>
+            <p *ngIf="user.email"><strong>Email:</strong> {{user.email}}</p>
+            <p *ngIf="user.birthday"><strong>Дата рождения:</strong> {{user.birthday | date:"shortDate"}}</p>
+            <p *ngIf="user.phone"><strong>Телефон:</strong> {{user.phone}}</p>
+            <p *ngIf="user.city"><strong>Город:</strong> {{user.city}}</p>
+            <button class="btn" [routerLink]="['/user/edit']">Редактировать</button>
+        </div>
+    </div>
+</div>

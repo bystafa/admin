@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutPageComponent } from './pages/admin-layout-page/admin-layout-page.component';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MainLayoutPageComponent } from './pages/main-layout-page/main-layout-page.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 const routes: Routes = [
 {
@@ -34,6 +36,23 @@ const routes: Routes = [
     {
       path: '',
       component: HomePageComponent
+    },
+    {
+      path: 'user',
+      children: [{
+        path: '',
+        redirectTo: '/user',
+        pathMatch: 'full'
+      },
+      {
+        path: '',
+        component: UserPageComponent
+      },
+      {
+        path: 'edit',
+        component: EditPageComponent
+      }
+    ]
     },
     {
       path: ':id',

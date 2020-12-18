@@ -1,0 +1,103 @@
+<div [formGroup]="form" class="form">
+    <h2>Редактирование</h2>
+    <div class="rowInfo">
+        <div class="img">
+            <img src="http://localhost:1337/uploads/small_WC_7y_Y_Eq_78_55e3d0b9de.jpg" alt="http://localhost:1337/uploads/not_available_07646d730e.jpg">
+            <input type="file" formControlName="img">
+            <button class="btn">Изменить фотографию</button>
+        </div>
+        <div class="inputs">
+            <div class="formcontrol">
+                <label for="firstName">Имя</label>
+                <input id="firstName" type="text" placeholder="Имя" formControlName="firstName">
+                <div
+                    *ngIf="form.get('firstName').touched && form.get('firstName').invalid"
+                    class="validation"
+                >
+                    <small *ngIf="form.get('firstName').errors.required">
+                        Введите поле - Имя
+                    </small>
+                    <small *ngIf="form.get('firstName').errors.minlength">
+                        Имя должно быть не менее
+                        {{form.get('firstName').errors.minlength.requiredLength}}
+                        символов. Сейчас он
+                        {{form.get('firstName').errors.minlength.actualLength}}
+                        символа.
+                    </small>
+                    <small *ngIf="form.get('firstName').errors.incorrectName">
+                        В имени должны присутствовать только буквы(одного алфавита).
+                    </small>
+                </div>
+            </div>
+            <div class="formcontrol">
+                <label for="lastName">Фамилия</label>
+                <input id="lastName" type="text" placeholder="Фамилия" formControlName="lastName">
+                <div
+                    *ngIf="form.get('lastName').touched && form.get('lastName').invalid"
+                    class="validation"
+                >
+                    <small *ngIf="form.get('lastName').errors.required">
+                        Введите поле - Фамилия
+                    </small>
+                    <small *ngIf="form.get('lastName').errors.minlength">
+                        Фамилия должна быть не менее
+                        {{form.get('lastName').errors.minlength.requiredLength}}
+                        символов. Сейчас он
+                        {{form.get('lastName').errors.minlength.actualLength}}
+                        символа.
+                    </small>
+                    <small *ngIf="form.get('lastName').errors.incorrectName">
+                        В фамилии должны присутствовать только буквы(одного алфавита).
+                    </small>
+                </div>
+            </div>
+            <div class="formcontrol">
+                <label for="phone">Телефон</label>
+                <input id="phone" type="tel" placeholder="Телефон" formControlName="phone" mask="(000) 000 0000" prefix="+7">
+                <div
+                    *ngIf="form.get('phone').touched && form.get('phone').invalid"
+                    class="validation"
+                >
+                    <small *ngIf="form.get('phone').errors.incorrectPhone">
+                        Введите корректный номер телефона
+                    </small>
+                </div>
+            </div>
+            <div class="formcontrol">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Email" formControlName="email">
+                <div
+                    *ngIf="form.get('email').touched && form.get('email').invalid"
+                    class="validation"
+                >
+                    <small *ngIf="form.get('email').errors.required">
+                        Введите поле - Email
+                    </small>
+                    <small *ngIf="form.get('email').errors.email">
+                        Введите корректный Email
+                    </small>
+                </div>
+            </div>
+            <div class="formcontrol">
+                <label>День рождения:</label>
+                <input type="date" formControlName="date">
+                <div
+                    *ngIf="form.get('date').invalid"
+                    class="validation"
+                >
+                    <small *ngIf="form.get('date').errors.incorrectDate">
+                        Вам меньше 18.
+                    </small>
+                </div>
+            </div>
+            <div class="formcontrol" formGroupName="place">
+                <label>Город:</label>
+                <select formControlName="city">
+                    <option>Не выбрано</option>
+                    <option *ngFor="let reg of region">{{reg.city}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" [disabled]="form.invalid" (click)="edit()">Редактировать</button>
+        </div>
+    </div>
+</div>

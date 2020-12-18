@@ -13,6 +13,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { MainLayoutPageComponent } from './pages/main-layout-page/main-layout-page.component';
 import { AdminLayoutPageComponent } from './pages/admin-layout-page/admin-layout-page.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { AdminLayoutPageComponent } from './pages/admin-layout-page/admin-layout
     PostComponent,
     HeaderComponent,
     MainLayoutPageComponent,
-    AdminLayoutPageComponent
+    AdminLayoutPageComponent,
+    UserPageComponent,
+    EditPageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,9 @@ import { AdminLayoutPageComponent } from './pages/admin-layout-page/admin-layout
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
