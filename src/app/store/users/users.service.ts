@@ -36,6 +36,35 @@ export class UsersService {
         )
     }
 
+    uploadPhoto(data: FormData) {
+        return this.http.post('http://localhost:1337/upload', data, {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            })
+        })
+    }
+
+    changeDataUser(id: number, data: Users) {
+        this.usersStore.update(id, data)
+        return this.http.put(`http://localhost:1337/users/${id}`, 
+        // {
+        //     username: data.username,
+        //     email: data.email,
+        //     firstName: data.firstName,
+        //     lastName: data.lastName,
+        //     birthday: data.birthday,
+        //     phone: data.phone,
+        //     city: data.city,
+        //     addr: data.addr
+        // }
+        data, 
+        {
+        headers: new HttpHeaders({
+            'Authorization': 'Bearer ' + this.keySuperAdmin
+        })
+        })
+    }
+
     clearStore() {
         //localStorage.removeItem('superAdmin')
         this.usersStore.remove()

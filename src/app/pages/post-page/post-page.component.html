@@ -16,15 +16,22 @@
         <div *ngIf="comments$ | async as comments">
             <h4 *ngIf="comments.length > 0">Комментарии({{comments.length}}):</h4>
             <div *ngFor="let comment of comments">
-                <div class="info">
-                    <small>{{comment.author}}</small>
-                    <small>{{comment.date | date}}</small>
-                </div>
-                <div class="comment">
-                    <span>{{comment.text}}</span>
-                    <div *ngIf="comment.author === user">
-                        <button class="btn" (click)="changeComment(comment.id, comment.text)">Редактировать</button>
-                        <button class="btn" (click)="deleteComment(comment.id)">Удалить</button>
+                <div *ngFor="let users of user$ |async">
+                    <div *ngIf="users.username === comment.author">
+                        <div class="info">
+                            <small>{{comment.author}}</small>
+                            <small>{{comment.date | date}}</small>
+                        </div>
+                        <div class="comment">
+                            <div>
+                                <img src="{{'http://localhost:1337' + users.img.url}}" [routerLink]="['/user']">
+                                <span>{{comment.text}}</span>
+                            </div>
+                            <div *ngIf="comment.author === user">
+                                <button class="btn" (click)="changeComment(comment.id, comment.text)">Редактировать</button>
+                                <button class="btn" (click)="deleteComment(comment.id)">Удалить</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

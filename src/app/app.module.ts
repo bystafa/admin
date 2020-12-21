@@ -17,6 +17,7 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     NgbModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

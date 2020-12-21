@@ -24,6 +24,7 @@
     "@angular/router": "~11.0.3",
     "@datorama/akita": "^5.3.0",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
+    "@ng-select/ng-select": "^5.0.9",
     "bootstrap": "^4.5.0",
     "ng2-date-picker": "^11.0.0",
     "ngx-mask": "^11.1.4",

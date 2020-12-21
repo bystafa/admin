@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CommentsQuery, Comment, CommentsService } from 'src/app/store/comments';
 import { Post, PostsQuery } from 'src/app/store/posts';
+import { Users, UsersQuery } from 'src/app/store/users';
 
 @Component({
   selector: 'app-post-page',
@@ -14,6 +15,7 @@ export class PostPageComponent implements OnInit, DoCheck {
 
   comments$: Observable<Comment[]>
   post$: Observable<Post[]>
+  user$: Observable<Users[]>
   //post: Post
   comment: Comment
   sent = true
@@ -24,12 +26,14 @@ export class PostPageComponent implements OnInit, DoCheck {
   constructor(private postsQuery: PostsQuery, 
               private commentsQuery: CommentsQuery, 
               private route: ActivatedRoute, 
-              private CommentsService: CommentsService) { }
+              private CommentsService: CommentsService,
+              private UsersQuery: UsersQuery) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('user')
     this.getPost()
     this.getComments()
+    this.user$ = this.UsersQuery.selectAll()
   }
 
   ngDoCheck(): void {

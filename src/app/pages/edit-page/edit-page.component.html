@@ -1,10 +1,11 @@
-<div [formGroup]="form" class="form">
+<div [formGroup]="form" class="form" *ngFor="let user of user$ | async">
     <h2>Редактирование</h2>
     <div class="rowInfo">
         <div class="img">
-            <img src="http://localhost:1337/uploads/small_WC_7y_Y_Eq_78_55e3d0b9de.jpg" alt="http://localhost:1337/uploads/not_available_07646d730e.jpg">
-            <input type="file" formControlName="img">
-            <button class="btn">Изменить фотографию</button>
+            <img src="{{'http://localhost:1337' + user.img.url}}">
+            <input type="file" (change)="onFileSelected($event)">
+            <button class="btn" (click)="uploadPhoto()">Загрузить фотографию</button>
+            <p>{{message}}</p>
         </div>
         <div class="inputs">
             <div class="formcontrol">
@@ -80,22 +81,32 @@
             </div>
             <div class="formcontrol">
                 <label>День рождения:</label>
-                <input type="date" formControlName="date">
+                <input type="date" formControlName="birthday">
                 <div
-                    *ngIf="form.get('date').invalid"
+                    *ngIf="form.get('birthday').invalid"
                     class="validation"
                 >
-                    <small *ngIf="form.get('date').errors.incorrectDate">
+                    <small *ngIf="form.get('birthday').errors.incorrectDate">
                         Вам меньше 18.
                     </small>
                 </div>
             </div>
-            <div class="formcontrol" formGroupName="place">
+            <!-- <div class="formcontrol" formGroupName="place">
                 <label>Город:</label>
                 <select formControlName="city">
                     <option>Не выбрано</option>
                     <option *ngFor="let reg of region">{{reg.city}}</option>
                 </select>
+            </div> -->
+            <div class="formcontrol">
+                <label>Город:</label>
+                <ng-select formControlName="city">
+                    <ng-option *ngFor="let reg of region">{{reg.city}}</ng-option>
+                </ng-select>
+            </div>
+            <div class="formcontrol" *ngIf="form.value.city">
+                <label>Адрес:</label>
+                <input type="text" placeholder="Address" formControlName="address">
             </div>
             <button type="submit" class="btn" [disabled]="form.invalid" (click)="edit()">Редактировать</button>
         </div>

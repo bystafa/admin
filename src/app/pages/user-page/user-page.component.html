@@ -9,6 +9,7 @@
             <p *ngIf="user.birthday"><strong>Дата рождения:</strong> {{user.birthday | date:"shortDate"}}</p>
             <p *ngIf="user.phone"><strong>Телефон:</strong> {{user.phone}}</p>
             <p *ngIf="user.city"><strong>Город:</strong> {{user.city}}</p>
+            <p *ngIf="user.addr"><strong>Адрес:</strong> {{user.addr}}</p>
             <button class="btn" [routerLink]="['/user/edit']">Редактировать</button>
         </div>
     </div>

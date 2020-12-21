@@ -51,6 +51,7 @@ input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
+ng-select,
 select,
 textarea {
   display: block;
@@ -65,4 +66,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 input[type='file'] {
   display: block;
   font-size: 1.2rem;
+}
+.ng-dropdown-panel {
+  position: relative !important;
+}
+.ng-value-label {
+  color: #000
+}
+.ng-option:hover {
+  background-color: #a0a0a0;
+  color: #fff;
 }

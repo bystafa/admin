@@ -10,6 +10,7 @@ export interface Users {
     birthday?: Date
     phone?: string
     city?: string
+    addr?: string
 }
 
 export function createUsers(params: Partial<Users>) {
