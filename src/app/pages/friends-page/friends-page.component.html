@@ -1,0 +1,45 @@
+<div class="form" *ngFor="let user of user$ | async">
+    <div *ngIf="user.acceptFriend.length || user.addFriend.length || user.friends.length;else alone">
+        <h2 *ngIf="user.acceptFriend.length || user.addFriend.length">Заявки в друзья</h2>
+        <h5 *ngIf="user.acceptFriend.length">Входящие</h5>
+        <div *ngFor="let acceptFriend of user.acceptFriend">
+            <div class="friends">
+                <div [routerLink]="['/user', acceptFriend.username]">
+                    <img src="{{urlHost + acceptFriend.img.url}}">
+                    <span><strong>{{acceptFriend.firstName}}</strong></span>
+                    <span><strong>{{acceptFriend.lastName}}</strong></span>
+                </div>
+                <div class="full">
+                    <button class="btn add" (click)="addFriend(acceptFriend.username)">&#10004;</button>
+                    <button class="btn remove" (click)="removeAccept(acceptFriend.username)">&#10008;</button>
+                </div>
+            </div>
+        </div>
+
+        <h5 *ngIf="user.addFriend.length">Исходящие</h5>
+        <div *ngFor="let addFriend of user.addFriend">
+            <div class="friends">
+                <div [routerLink]="['/user', addFriend.username]">
+                    <img src="{{urlHost + addFriend.img.url}}">
+                    <span><strong>{{addFriend.firstName}}</strong></span>
+                    <span><strong>{{addFriend.lastName}}</strong></span>
+                </div>
+                <button class="btn remove" (click)="removeAdd(addFriend.username)">&#10008;</button>
+            </div>
+        </div>
+        <h2 *ngIf="user.friends.length">Мои друзья</h2>
+        <div *ngFor="let friend of user.friends"> 
+            <div class="friends">
+                <div [routerLink]="['/user', friend.username]">
+                    <img src="{{urlHost + friend.img.url}}">
+                    <span><strong>{{friend.firstName}}</strong></span>
+                    <span><strong>{{friend.lastName}}</strong></span>
+                </div>
+                <button class="btn remove" (click)="removeFriend(friend.username)">&#10008;</button>
+            </div>
+        </div>
+    </div>
+    <ng-template #alone>
+        <h4>У вас нет друзей &#9785;</h4>
+    </ng-template>
+</div>

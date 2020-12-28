@@ -13,15 +13,24 @@ export class CommentsQuery extends QueryEntity<CommentsState> {
     }
 
     getComments(idPost: number): Observable<Comment[]> {
-        return this.selectAll().pipe(
-            map((response: {[key: string]: any}) => {
-                return Object
-                  .keys(response)
-                  .map(key => ({
-                    ...response[key]
-                  }))
-                  .filter(p => p.post.id === idPost)
-            })
-        )
+        // return this.selectAll().pipe(
+        //     map((response: {[key: string]: any}) => {
+        //         return Object
+        //           .keys(response)
+        //           .map(key => ({
+        //             ...response[key]
+        //           }))
+        //           .filter(p => p.post.id === idPost)
+        //     })
+        // )
+        return this.selectAll({
+            filterBy: (entities) => entities.post.id === idPost
+        })
+    }
+
+    getCommentsByName(user: string) {
+        return this.selectAll({
+            filterBy: (entities) => entities.author === user
+        })
     }
 }

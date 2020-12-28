@@ -1,0 +1,39 @@
+.form {
+    max-width: 800px;
+    margin: 100px auto;
+    h5 {
+        text-align: center;
+    }
+    h2 {
+        margin-top: 30px;
+    }
+    .friends {
+        cursor: pointer;
+        background-color: #EDEEF6;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        span {
+            margin-left: 10px;
+        }
+        img {
+            height: 100px;
+            width: 100px;
+        }
+        .remove {
+            background-color: brown;
+        }
+        .add {
+            background-color: chartreuse;
+        }
+        .btn {
+            padding: 10px 20px;
+        }
+        .full {
+            .btn {
+                height: 100%;
+            }
+        }
+    }
+}

@@ -15,18 +15,21 @@ export class PostsQuery extends QueryEntity<PostsState> {
     }
 
     getPost(idPost: number): Observable<Post[]> {
-        //return this.select(idPost)
-        return this.selectAll().pipe(
-            //filter(v => v.forEach((elem: Post) => elem.id === idPost))
-            // tap(v => v.forEach(elem => console.log(elem))),
-            map((response: {[key: string]: any}) => {
-                return Object
-                  .keys(response)
-                  .map(key => ({
-                    ...response[key]
-                  }))
-                  .filter(p => p.id === idPost)
-            })
-        )
+        // //return this.select(idPost)
+        // return this.selectAll().pipe(
+        //     //filter(v => v.forEach((elem: Post) => elem.id === idPost))
+        //     // tap(v => v.forEach(elem => console.log(elem))),
+        //     map((response: {[key: string]: any}) => {
+        //         return Object
+        //           .keys(response)
+        //           .map(key => ({
+        //             ...response[key]
+        //           }))
+        //           .filter(p => p.id === idPost)
+        //     })
+        // )
+        return this.selectAll({
+            filterBy: (entities) => entities.id === idPost
+        })
     }
 }

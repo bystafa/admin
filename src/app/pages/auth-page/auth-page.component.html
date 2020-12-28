@@ -49,4 +49,5 @@
         </div>
     </div>
     <button type="submit" [disabled]="form.invalid" class="btn" (click)="logIn()">Войти</button>
+    <p [routerLink]="['/auth/register']">Зарегистроваться?</p>
 </div>

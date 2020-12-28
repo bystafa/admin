@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { CommentsQuery, Comment, CommentsService } from 'src/app/store/comments';
 import { Post, PostsQuery } from 'src/app/store/posts';
 import { Users, UsersQuery } from 'src/app/store/users';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-page',
@@ -16,12 +17,11 @@ export class PostPageComponent implements OnInit, DoCheck {
   comments$: Observable<Comment[]>
   post$: Observable<Post[]>
   user$: Observable<Users[]>
-  //post: Post
-  comment: Comment
   sent = true
   user = ''
   text = ''
   id = 0
+  urlHost = environment.strpUrl
 
   constructor(private postsQuery: PostsQuery, 
               private commentsQuery: CommentsQuery, 
@@ -41,12 +41,6 @@ export class PostPageComponent implements OnInit, DoCheck {
   }
 
   getPost(): void{
-    // this.route.params.subscribe((params: Params) => {
-    //   this.id = +params
-    // },null, ()=> {
-    //   console.log(this.id)
-    //   console.log(this.postsQuery.getPost(this.id))
-    // })
     this.post$ = this.route.params
     .pipe(switchMap((params: Params) => {
       return this.postsQuery.getPost(+params['id'])
@@ -68,34 +62,29 @@ export class PostPageComponent implements OnInit, DoCheck {
 
   deleteComment(id: number): void {
     this.CommentsService.deleteComment(id).subscribe(null, null, () => {
+      this.CommentsService.setDataIfSuccess('delete', id)
       this.getComments()
     })
   }
 
   addComment(idPost: number): void {
     if (this.sent && this.text) {
-      // this.comment = {
-      //   id: +new Date(),
-      //   author: localStorage.getItem('user'),
-      //   text: this.text,
-      //   date: new Date,
-      //   post: {
-      //     id: idPost
-      //   }
-      // }
       this.CommentsService.addComment(idPost, this.text).subscribe(null,null,
         () => {
-          this.getComments()
+          this.CommentsService.setDataIfSuccess('add')
+          this.CommentsService.loadComments().subscribe(null, null,() => {this.getComments()}) // strapi меняет id на свой, приходится получать заново инфу
+          this.text = ''
         })
     }
     else {
       this.CommentsService.changeComment(this.id, this.text).subscribe(null,null,
         () => {
+          this.CommentsService.setDataIfSuccess('change',this.id, this.text)
           this.getComments()
+          this.text = ''
         })
     }
     this.sent = true
-    this.text = ''
   }
 
 }

@@ -1,0 +1,88 @@
+<div [formGroup]="form" class="form" >
+    <h2>Регистрация</h2>
+    <div class="formcontrol">
+        <label for="firstName">Имя</label>
+        <input id="firstName" type="text" placeholder="Имя" formControlName="firstName">
+        <div
+            *ngIf="form.get('firstName').touched && form.get('firstName').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('firstName').errors.required">
+                Введите поле - Имя
+            </small>
+            <small *ngIf="form.get('firstName').errors.minlength">
+                Имя должно быть не менее
+                {{form.get('firstName').errors.minlength.requiredLength}}
+                символов. Сейчас он
+                {{form.get('firstName').errors.minlength.actualLength}}
+                символа.
+            </small>
+            <small *ngIf="form.get('firstName').errors.incorrectName">
+                В имени должны присутствовать только буквы(одного алфавита).
+            </small>
+        </div>
+    </div>
+    <div class="formcontrol">
+        <label for="lastName">Фамилия</label>
+        <input id="lastName" type="text" placeholder="Фамилия" formControlName="lastName">
+        <div
+            *ngIf="form.get('lastName').touched && form.get('lastName').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('lastName').errors.required">
+                Введите поле - Фамилия
+            </small>
+            <small *ngIf="form.get('lastName').errors.minlength">
+                Фамилия должна быть не менее
+                {{form.get('lastName').errors.minlength.requiredLength}}
+                символов. Сейчас он
+                {{form.get('lastName').errors.minlength.actualLength}}
+                символа.
+            </small>
+            <small *ngIf="form.get('lastName').errors.incorrectName">
+                В фамилии должны присутствовать только буквы(одного алфавита).
+            </small>
+        </div>
+    </div>
+    <div class="formcontrol">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Email" formControlName="email">
+        <div
+            *ngIf="form.get('email').touched && form.get('email').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('email').errors.required">
+                Введите поле - Email
+            </small>
+            <small *ngIf="form.get('email').errors.email">
+                Введите корректный Email
+            </small>
+        </div>
+    </div>
+    <div class="formcontrol">
+        <label for="login">Логин</label>
+        <input id="login" type="text" placeholder="Логин" formControlName="username">
+        <div
+            *ngIf="form.get('username').touched && form.get('username').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('username').errors.required">
+                Введите поле - Логин
+            </small>
+        </div>
+    </div>
+    <div class="formcontrol">
+        <label for="password">Пароль</label>
+        <input id="password" type="password" placeholder="Пароль" formControlName="password">
+        <div
+            *ngIf="form.get('password').touched && form.get('password').invalid"
+            class="validation"
+        >
+            <small *ngIf="form.get('password').errors.required">
+                Введите поле - Пароль
+            </small>
+        </div>
+    </div>
+    <button type="submit" class="btn" [disabled]="form.invalid" (click)="edit()">Зарегистрироваться</button>
+    <button type="button" class="btn" [routerLink]="['/']">На главную</button>
+</div>

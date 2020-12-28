@@ -1,8 +1,8 @@
 <div class="header">
     <h3 [routerLink]="['/']">Новости</h3>
     <div class="right">
-        <button class="btn" *ngIf="this.user" [routerLink]="['/user']">{{this.user}}</button>
-        <button *ngIf="!this.user; else out" [routerLink]="['/auth']" class="btn">Войти</button>
+        <button class="btn" *ngIf="user" [routerLink]="['/user', user]">{{user}}</button>
+        <button *ngIf="!user; else out" [routerLink]="['/auth']" class="btn">Войти</button>
         <ng-template #out>
             <button class="btn" (click)="logOut()">Выйти</button>
         </ng-template>

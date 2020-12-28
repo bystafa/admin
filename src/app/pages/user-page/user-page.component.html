@@ -1,8 +1,18 @@
 <div class="form" *ngFor="let user of user$ |async">
-    <h1>{{user.firstName}} {{user.lastName}}</h1>
+    <div class="spacebetween">
+        <h1>{{user.firstName}} {{user.lastName}}</h1>
+        <div *ngIf="user.username === currentUserName; else add">
+            <button class="btn" [routerLink]="['/user/friends']">Друзья</button>
+            <button class="btn" [routerLink]="['/user/edit']" >Редактировать</button>
+        </div>
+        <ng-template #add>
+            <div>
+                <button class="btn" (click)="addFriend(user.id, user.acceptFriend, user)" >Добавить в друзья</button>
+            </div>
+        </ng-template>
+    </div>
     <div class="rowInfo">
-        <img *ngIf="user.img" src="{{'http://localhost:1337' + user.img.url}}">
-        <img *ngIf="!user.img" src="http://localhost:1337/uploads/not_available_07646d730e.jpg">
+        <img *ngIf="user.img" src="{{urlHost + user.img.url}}">
         <div class="text">
             <p *ngIf="user.username"><strong>Псевдоним:</strong> {{user.username}}</p>
             <p *ngIf="user.email"><strong>Email:</strong> {{user.email}}</p>
@@ -10,7 +20,13 @@
             <p *ngIf="user.phone"><strong>Телефон:</strong> {{user.phone}}</p>
             <p *ngIf="user.city"><strong>Город:</strong> {{user.city}}</p>
             <p *ngIf="user.addr"><strong>Адрес:</strong> {{user.addr}}</p>
-            <button class="btn" [routerLink]="['/user/edit']">Редактировать</button>
         </div>
+    </div>
+    <h4 *ngIf="user.friends.length">Друзья({{user.friends.length}}):</h4>
+    <div *ngFor="let friend of user.friends" class="friends">
+        <img *ngIf="user.img" src="{{urlHost + user.img.url}}" [routerLink]="['/user', friend.username]">
+    </div>
+    <div *ngFor="let person of currentUser| async">
+        {{person.username}}
     </div>
 </div>

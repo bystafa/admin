@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post, PostsQuery, PostsService } from 'src/app/store/posts';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -8,6 +9,8 @@ import { Post, PostsQuery, PostsService } from 'src/app/store/posts';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit{
+
+  urlHost = environment.strpUrl
 
   posts$: Observable<Post[]>
 

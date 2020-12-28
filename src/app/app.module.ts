@@ -18,6 +18,9 @@ import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { RegistrComponent } from './pages/registr/registr.component';
+import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MainLayoutPageComponent,
     AdminLayoutPageComponent,
     UserPageComponent,
-    EditPageComponent
+    EditPageComponent,
+    ErrorPageComponent,
+    RegistrComponent,
+    FriendsPageComponent
   ],
   imports: [
     BrowserModule,

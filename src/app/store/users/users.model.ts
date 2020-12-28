@@ -11,6 +11,30 @@ export interface Users {
     phone?: string
     city?: string
     addr?: string
+    acceptFriend: [{
+        lastName?: string
+        firstName?: string
+        username: string
+        img?: {
+            url: string
+        }
+    }],
+    addFriend: [{
+        lastName?: string
+        firstName?: string
+        username: string
+        img?: {
+            url: string
+        }
+    }],
+    friends: [{
+        lastName?: string
+        firstName?: string
+        username: string
+        img?: {
+            url: string
+        }
+    }]
 }
 
 export function createUsers(params: Partial<Users>) {

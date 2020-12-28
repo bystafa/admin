@@ -5,6 +5,7 @@ import {regions} from '../../russia'
 import { UsersQuery, Users, UsersService } from 'src/app/store/users';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-page',
@@ -17,18 +18,19 @@ export class EditPageComponent implements OnInit {
   region = regions
   selectedFile: File
   idUser: number
+  imgUrl: string
   user$: Observable<Users[]>
   message:string
+  urlHost = environment.strpUrl
 
   constructor(private UsersQuery: UsersQuery, private UsersService: UsersService, private Router: Router) { }
 
   ngOnInit(): void {
-    this.user$ = this.UsersQuery.getByLogin() // пока так потом запрос специально для фото
     this.region.sort((a, b)=> {
       let cityA = a.city.toLowerCase(),
         cityB = b.city.toLowerCase()
         if (cityA < cityB) return -1
-        if (cityA > cityB) return 1
+        else if (cityA > cityB) return 1
         return 0 
     })
     this.form = new FormGroup({
@@ -38,26 +40,40 @@ export class EditPageComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       birthday: new FormControl('', [MyValidators.correctDate]),
       city: new FormControl(''),
-      address: new FormControl(''),
+      addr: new FormControl(''),
       img: new FormControl()
     })
     
-    this.UsersQuery.getByLogin().subscribe((resp) => {
-      resp.forEach(elem => {
+    this.UsersQuery.getByParam(localStorage.getItem('user')).subscribe((resp) =>  {
+      resp.forEach((elem) => {
         this.idUser = elem.id
         this.form.setValue({
-          firstName: elem.firstName,
-          lastName: elem.lastName,
-          phone: elem.phone,
-          email:  elem.email,
-          birthday: elem.birthday,
-          city: elem.city,
-          address: elem.addr,
-          img: elem.img
-        })
+          firstName: elem.firstName || '',
+          lastName: elem.lastName || '',
+          phone: elem.phone || '',
+          email:  elem.email || '',
+          birthday: elem.birthday || '',
+          city: elem.city || '',
+          addr: elem.addr || '',
+          img: elem.img || ''
       })
-    })
+      if (elem.img) {
+        this.imgUrl = elem.img.url
+      }
+    })    
+  })
+}
+
+  ngDoCheck(): void {
+    if (!localStorage.getItem('user')) {
+      this.Router.navigate(['/'])
+    }
   }
+
+  clear() {
+    this.form.patchValue({addr: ''})
+  }
+  
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0]
   }
@@ -67,10 +83,15 @@ export class EditPageComponent implements OnInit {
     data.append('files', this.selectedFile)
     this.UsersService.uploadPhoto(data).subscribe((resp)=> this.form.patchValue({img: resp[0]}),null,()=> {
       this.message = 'Загружено!'
+      this.imgUrl = this.form.value.img.url
     })
   }
   edit() {
-    this.UsersService.changeDataUser(this.idUser, this.form.value)
-    this.Router.navigate(['/user'])
+    this.UsersService.changeDataUser(this.idUser, this.form.value).subscribe(
+      null,null, ()=> {
+        this.UsersService.setDataIfSuccess(this.idUser, this.form.value)
+        this.Router.navigate(['/user', localStorage.getItem('user')])
+      }
+    )
   }
 }

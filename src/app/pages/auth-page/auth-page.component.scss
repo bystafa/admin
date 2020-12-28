@@ -28,5 +28,13 @@
         width: 100%;
         margin-top: 20px;
     }
-    
+    p {
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+        outline: none;
+        &:hover {
+            color: #121BD3;
+        }
+    }
 }
